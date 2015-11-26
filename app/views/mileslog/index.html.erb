@@ -1,0 +1,78 @@
+<div class="header">
+  <h1>Vehicle Mileage Tracker</h1>
+</div>
+
+<div class="container">
+  <div class="error">
+    <% if @log %>
+      <% @log.errors.each do |column, message| %>
+          <h6><strong><%= column.capitalize %></strong> <%= message %></h6>
+      <% end %>
+    <% end %>
+  </div>
+
+
+  <form action="/entry" method="POST">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <div class="row">
+      <div class="six columns">
+        <label for="odometer" class="label">Odometer Reading</label>
+        <input class="u-full-width" placeholder="100,000" name="odometer" id="odometer" type="integer"/>
+      </div>
+      <div class="six columns">
+        <label for="gallons-filled" class="label">Gallons Filled</label>
+        <input class="u-full-width" placeholder="15.0" type="float" name="gallons_filled" id="gallons-filled"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="four columns">
+        <label for="gas"></label>
+        <span class="label-body">Fill-Up?</span>
+        <input type="checkbox" name="gas" id="gas"/>
+      </div>
+      <div class="four columns">
+        <label for="oil"></label>
+        <span class="label-body">Oil Change?</span>
+        <input type="checkbox" name="oil" id="oil"/>
+      </div>
+      <div class="four columns">
+        <input class="button-primary" type="submit" value="Log Mileage">
+      </div>
+    </div>
+  </form>
+
+  <table class="u-full-width">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Odometer</th>
+        <th>Gas Fill-Up?</th>
+        <th>Oil Change?</th>
+        <th>Gallons Filled</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @logs.each do |entry| %>
+        <tr>
+          <td><%= entry.created_at.localtime.strftime("%m/%d/%Y") %></td>
+          <td><%= number_with_delimiter(entry.odometer) %></td>
+          <td><% if entry.gas == true %>
+                  <%= image_tag "checkmark.png"%>
+                  <%end%></td>
+          <td><% if entry.oil == true %>
+                  <%= image_tag "checkmark.png"%>
+                  <%end%></td>
+          <td><%= entry.gallons_filled %></td>
+          <td>
+            <form action="/<%= entry.id %>" method="POST" class="formbutton">
+            <input type="hidden" name="authenticity_token" value="<% form_authenticity_token %>" >
+            <input type="hidden" name="_method" value="DELETE">
+            <input class="button-primary delete" type="submit" value="Delete entry">
+            </form>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

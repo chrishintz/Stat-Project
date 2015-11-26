@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  get "/",        to:"mileslog#index"
-
+  get "/",          to: "mileslog#index", as: :home
+  # get "/entry/new", to: "mileslog#add_stat"
+  post "/entry",    to: "mileslog#add_stat"
+  delete "/:id",    to: "mileslog#remove_stat"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

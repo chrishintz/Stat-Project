@@ -1,0 +1,51 @@
+body {
+  background-color: lightgrey;
+}
+
+.container{
+  background-color: white;
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+  min-height: 800px;
+}
+
+.header h1 {
+  margin-bottom: 0;
+  width: 100%;
+  line-height: normal;
+}
+
+.header {
+  position: relative;
+  background: #70AB8F;
+  font-family: 'Open Sans', Helvetica, Arial, Helvetica, sans-serif;
+  text-align: center;
+  color: white;
+  margin-bottom: 0px;
+}
+
+table {
+  text-align: center;
+}
+
+.label-body {
+  text-align: center;
+}
+
+.checkbox {
+  text-align: center;
+}
+
+input.button-primary.delete {
+  background-color: #DC5B21 !important;
+  border-color: #DC5B21 !important;
+}
+
+input.button-primary{
+  background-color: #70AB8F !important;
+  border-color: #70AB8F !important;
+}
+
+.error {
+  color: red;
+}

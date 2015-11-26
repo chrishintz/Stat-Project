@@ -1,5 +1,3 @@
 class Mileslog < ActiveRecord::Base
-
-validates :odometer, presence: true
-
+  validates :odometer, presence: true
 end
